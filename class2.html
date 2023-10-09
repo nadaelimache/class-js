@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class2</title>
+</head>
+<body>
+    <h1>Form Creazione Pet</h1>
+    <form id="petForm">
+        <label for="petName">Nome dell'animale:</label>
+        <input type="text" id="petName" required><br>
+        
+        <label for="ownerName">Nome del proprietario:</label>
+        <input type="text" id="ownerName" required><br>
+        
+        <label for="species">Specie:</label>
+        <input type="text" id="species" required><br>
+        
+        <label for="breed">Razza:</label>
+        <input type="text" id="breed" required><br>
+
+        <button type="submit">Aggiungi Pet</button>
+    </form>
+
+    <h2>Lista dei Pets</h2>
+    <ul id="petList"></ul>
+
+    <script>
+
+        class Pet {
+            constructor(petName, ownerName, species, breed) {
+                this.petName = petName
+                this.ownerName = ownerName
+                this.species = species
+                this.breed = breed
+            }
+            ownerSame(other) {
+                if (this.ownerName === other.ownerName) {
+                    return true
+                }
+            }
+        }
+
+        const form = document.getElementById('petForm')
+        const list = document.getElementById('petList')
+        const pets = []
+        form.addEventListener('submit', function (e) {
+          const petName = document.getElementById('petName')
+          const ownerName = document.getElementById('ownerName')
+          const species = document.getElementById('species')
+          const breed = document.getElementById('breed')
+
+          const petForm = new Pet(petName, ownerName, species, breed)
+          pets.push(petForm);
+          displayPets();
+          form.reset();
+        })
+
+        function displayPets() {
+            list.innerHTML = ''
+            pets.forEach((pet, index) => {
+                const li = document.createElement('li')
+                li.textContent = `${petName}, ${ownerName}, ${species}, ${breed}`
+                list.appendChild(li);
+            });
+        };
+    </script>
+
+</body>
+</html>
